@@ -5,8 +5,8 @@
 }
 
 :root {
-    --bg: #4546a0;
-    --bg2: #3b3c86;
+    --bg: #ddabab;
+    --bg2: #ce92d3;
 }
 
 body {
@@ -54,7 +54,7 @@ nav .container-fluid .navbar-brand {
 }
 
 .section button {
-    color: white;
+    color: rgb(255, 255, 255);
     background-color: var(--bg);
 }
 .section button:hover {

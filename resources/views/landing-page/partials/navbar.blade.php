@@ -2,7 +2,7 @@
     <div class="container-fluid p-0">
         <!-- Logo or brand on the left -->
         <a class="navbar-brand" href="/">
-            <h3 class="fw-bold fst-italic">Trash-P</h3>
+            <h3 class="fw-bold fst-italic">LimbahKu</h3>
         </a>
         <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

@@ -7,7 +7,7 @@
 
     <div class="section d-flex justify-content-center align-items-center">
         <div class="section-container p-5 d-flex flex-column align-items-end text-end mt-5">
-            <h2>Trash-P: Mudahnya Bayar Sampah Bulanan Secara Online</h2>
+            <h2>Trash-P: Mudahnya Bayar Sampah Bulanan Secara hello</h2>
             <p class="pb-2">Selamat datang di Trash-P solusi modern untuk membayar sampah bulanan dengan mudah dan
                 cepat.
                 Dengan website ini, Anda bisa melakukan pembayaran secara online tanpa ribet.
