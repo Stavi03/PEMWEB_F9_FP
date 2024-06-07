@@ -1,0 +1,81 @@
+* {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+:root {
+    --bg: #4546a0;
+    --bg2: #3b3c86;
+}
+
+body {
+    background-color: #333;
+}
+
+.container-fluid {
+    max-width: 1140px;
+}
+nav .container-fluid .navbar-brand {
+    color: #4546a0;
+}
+
+.nav-item a:hover {
+    color: white !important;
+    background-color: var(--bg);
+    border-radius: 5px;
+}
+
+.nav-link.active {
+    color: var(--bg) !important; /* Change this to the desired color */
+}
+
+.section {
+    background-image: linear-gradient(
+            to top,
+            rgb(255, 255, 255) 0%,
+            transparent
+        ),
+        url("../image/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    padding-top: 50px;
+}
+
+.section-container {
+    background-color: #ffffff67;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    height: 410px;
+    width: 550px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.section button {
+    color: white;
+    background-color: var(--bg);
+}
+.section button:hover {
+    color: white;
+    background-color: var(--bg2);
+}
+
+.kegiatan {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 100px 0px;
+}
+
+footer .container {
+    max-width: 1140px;
+    margin: auto;
+}
+
+.about {
+    background-color: var(--bg);
+}
+.about .container {
+    max-width: 1140px;
+}
