@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Tagihan;
 use App\Models\sampah_tkmpls;
+use App\Models\Sampah;
 
 class User extends Authenticatable
 {
@@ -57,7 +58,13 @@ class User extends Authenticatable
     public function sampah_tkmpls()
     {
         return $this->hasMany(sampah_tkmpls::class);
-}
+    }
+
+    // Relasi dengan model Sampah
+    public function sampahs()
+    {
+        return $this->hasMany(Sampah::class, 'user_id');
+    }
 
 
 }

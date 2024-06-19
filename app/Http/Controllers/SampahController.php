@@ -13,8 +13,9 @@ class SampahController extends Controller
     public function index()
 {
     $users = User::pluck('nama', 'id');
+    $sampah = Sampah::with('user')->get();
 
-    return view('admin.input', compact('users'))->with([
+    return view('admin.input', compact('users, sampah'))->with([
         "title" => "input"
     ]);
 }

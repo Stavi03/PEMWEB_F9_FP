@@ -84,6 +84,11 @@ $labels = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agus
                 </tbody>
             </table>
         </div>
+
+          {{-- buttton pdf --}}
+          <div class="d-flex justify-content-end">
+            <a class="btn btn-danger rounded-5 px-4 py-2 mt-3" href="{{ route('admin.pdf') }}"><i class="bi bi-filetype-pdf me-2"></i>Cetak PDF</a>
+            </div>
     </main>
 
     {{-- script chart js --}}

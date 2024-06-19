@@ -49,6 +49,9 @@ Route::middleware(['auth', 'adminakses'])->group(function () {
     Route::get('/admin/input', [SampahController::class, 'index'])->name('admin.input');
     Route::post('/admin/input', [SampahController::class, 'store'])->name('admin.input.store');
 
+    Route::get('/admin/pdf', [TagihanController::class, 'view_pdf'])->name('admin.pdf');
+
+
     Route::get('/admin/ubah-data/{id}', [AdminDashboardController::class, 'edit'])->name('admin.edit-data');
     Route::post('/admin/ubah-data/{id}', [AdminDashboardController::class, 'update'])->name('admin.edit-data.update');
 

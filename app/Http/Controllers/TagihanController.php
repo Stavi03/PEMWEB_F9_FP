@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreTagihanRequest;
 use App\Http\Requests\UpdateTagihanRequest;
 use Illuminate\Support\Facades\Session;
-
+use Dompdf\Dompdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 //import model
 use App\Models\sampah_tkmpls;
@@ -119,4 +120,33 @@ class TagihanController extends Controller
         $tagihan->delete();
         return redirect('/admin/tagihan');
     }
+
+
+
+// public function view_pdf(){
+
+//     // instantiate and use the dompdf class
+//     $dompdf = new Dompdf();
+//     $dompdf->loadHtml('hello world');
+
+//     // (Optional) Setup the paper size and orientation
+//     $dompdf->setPaper('A4', 'landscape');
+
+//     // Render the HTML as PDF
+//     $dompdf->render();
+
+//     // Output the generated PDF to Browser
+//     $dompdf->stream();
+// }
+
+public function view_pdf()
+{
+    $sampah = sampah_tkmpls::all();
+
+    $pdf = PDF::loadView('admin.pdf', compact('sampah'));
+    return $pdf->download('laporan.pdf');
+}
+
+
+
 }

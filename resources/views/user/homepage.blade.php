@@ -1,3 +1,8 @@
+<?php
+$labels = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+$values = [10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000];
+?>
+
 @extends('user.layout.main-user')
 
 @section('homepage')
@@ -23,6 +28,36 @@
             </div>
         </section>
 
+        {{-- script chart js --}}
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <script>
+
+        const labels = <?php echo json_encode($labels); ?>;
+        const data = <?php echo json_encode($values); ?>;
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Hasil per Tahun',
+                    data: data,
+                    borderWidth: 1,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
         {{-- tagihan --}}
         <section class="section justify-content-center align-items-center">
             <div class="section-container pb-3 d-flex flex-column align-items-start text-start mt-5">
@@ -41,7 +76,7 @@
                     @foreach ($sampah as $data)
                         <tr>
                             <td>{{ $data->user_id }}</td>
-                            <td>{{ $data->Berat }} Gram</td>
+                            <td>{{ $data->Berat }}Gram</td>
                             <td>Rp.{{ $data->Hasil }}</td>
                             <td>{{ $data->created_at }}</td>
                         </tr>

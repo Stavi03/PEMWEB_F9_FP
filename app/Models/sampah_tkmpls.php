@@ -18,7 +18,8 @@ class sampah_tkmpls extends Model
     ];
     protected $guarded = [];
 
-    public function User(){
-        return $this->hasOne(User::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
