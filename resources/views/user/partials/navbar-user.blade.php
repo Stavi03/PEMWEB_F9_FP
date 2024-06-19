@@ -2,7 +2,7 @@
     <div class="container-fluid p-0">
         <!-- Logo or brand on the left -->
         <a class="navbar-brand" href="/">
-            <h3 class="fw-bold fst-italic">Trash-P</h3>
+            <h3 class="fw-bold fst-italic">LimbahKu</h3>
         </a>
         <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -14,9 +14,6 @@
             <ul class="navbar-nav">
                 <li class="nav-item pe-3">
                     <a class="nav-link {{ $title === 'homepage' ? 'active' : '' }}" href="/user">Home</a>
-                </li>
-                <li class="nav-item pe-3">
-                    <a class="nav-link {{ $title === 'pembayaran' ? 'active' : '' }}" href="/pembayaran">Pembayaran</a>
                 </li>
                 <li class="nav-item">
                     <form action="/logout" method="post">

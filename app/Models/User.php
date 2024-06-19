@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Tagihan;
+use App\Models\sampah_tkmpls;
 
 class User extends Authenticatable
 {
@@ -52,10 +53,10 @@ class User extends Authenticatable
     protected $guarded = ['id'];
 
 
-    // untuk menghubungkan ke database pembayaran
-    public function Tagihan()
+    // untuk menghubungkan ke database _sampah_tkmpls
+    public function sampah_tkmpls()
     {
-        return $this->hasMany(Tagihan::class);
+        return $this->hasMany(sampah_tkmpls::class);
 }
 
 

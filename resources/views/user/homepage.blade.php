@@ -41,24 +41,29 @@
             <table class="table table-striped table-sm " style="back">
                 <thead>
                     <tr>
-                        <th scope="col">Bulan</th>
-                        <th scope="col">Nominal</th>
+                        <th scope="col">Sampah Terkumpul (gram)</th>
+                        <th scope="col">Hasil penjualan</th>
                         <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Auth::user()->tagihan as $tagihan)
+                    @foreach ($sampah as $data)
                         <tr>
-                            <td>{{ $tagihan->bulan ?? 'Tidak ada tagihan' }}</td>
-                            <td>{{ $tagihan->nominal ?? 'Tidak ada nominal' }}</td>
-                            <td>{{ $tagihan->status }}</td>
+                            <td>{{ $data->Berat }}</td>
+                            <td>{{ $data->Hasil }}</td>
+                            <td>{{ $data->created_at }}</td>
                         </tr>
                     @endforeach
+                    {{-- @foreach ($users as $data)
+                        <tr>
+                            <td>{{ $data->sampah_tkmpls->Berat }}</td>
+                            <td>{{ $data->sampah_tkmpls->hasil ?? 'Tidak ada nominal' }}</td>
+                            <td>{{ $data->sampah_tkmpls->created_at }}</td>
+                        </tr>
+                    @endforeach --}}
 
                 </tbody>
             </table>
-            <button class="btn rounded-5 px-4 py-2 mt-3" onclick="window.location.href='/pembayaran';">Bayar
-                Sekarang</button>
         </section>
     </main>
 

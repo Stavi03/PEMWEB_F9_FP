@@ -7,17 +7,16 @@
     {{-- link css --}}
     <link rel="stylesheet" href="{{ asset('css/style-admin.css') }}">
 
+    {{-- link chart js --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <main>
         <div class="bulan">
-            <h3 class="text-start mb-4 mt-5">Status tagihan warga</h3>
+            <h3 class="text-start mb-4 mt-5">Data Limbah Warga</h3>
 
-
-            {{-- <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Masukan nama bulan:</span>
-                <input type="text" class="form-control" placeholder="Nama Bulan" aria-label="Nama Bulan"
-                    aria-describedby="basic-addon1">
-                <button class="btn btn-primary" type="button">Cari</button>
-            </div> --}}
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
 
             <div class="d-flex align-items-center justify-content-between my-5">
                 {{-- search --}}
@@ -56,7 +55,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
         <div class="table-tagihan">
             <table class="table">
@@ -67,8 +65,7 @@
                         <th scope="col">Bulan</th>
                         <th scope="col">Status</th>
                         <th scope="col">Catatan</th>
-                        <th scope="col">Tanggal Bayar</th>
-                        <th scope="col">Bukti</th>
+                        <th scope="col">Tanggal Pengumpulan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,41 +73,56 @@
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $data->nama }}</td>
-                            <td>{{ $data->tagihan->first()->bulan ?? now()->format('F') }}</td>
+                            <td>{{ $data->sampah_tkmpls->first()->bulan ?? now()->format('F') }}</td>
                             <td
-                                style="{{ $data->tagihan->first() ? 'color:' . ($data->tagihan->first()->status === 'sudah terbayar' ? 'green' : 'red') : 'color:red' }}">
-                                {{ $data->tagihan->first() ? $data->tagihan->first()->status : 'belum terbayar' }}
+                                style="{{ $data->sampah_tkmpls->first() ? 'color:' . ($data->sampah_tkmpls->first()->status === 'sudah terbayar' ? 'green' : 'red') : 'color:red' }}">
+                                {{ $data->sampah_tkmpls->first() ? $data->sampah_tkmpls->first()->status : 'belum terbayar' }}
                             </td>
-
-                            <td>{{ $data->tagihan->first()->catatan ?? '-' }}</td>
-
+                            <td>{{ $data->sampah_tkmpls->first()->catatan ?? '-' }}</td>
                             <td>
-                                {{ $data->tagihan->first() ? $data->tagihan->first()->created_at->format('d-m-Y') : '-' }}
+                                {{ $data->sampah_tkmpls->first() ? $data->sampah_tkmpls->first()->created_at->format('d-m-Y') : '-' }}
                             </td>
-
-
-                            @if ($data->tagihan->first() && $data->tagihan->first()->status == 'sudah terbayar')
+                            @if ($data->sampah_tkmpls->first() && $data->sampah_tkmpls->first()->status == 'sudah terbayar')
                                 <td>
                                     {{-- button untuk melihat bukti --}}
-                                    <div class="mb-1">
-                                        <a href="{{ asset('storage/' . $data->tagihan->first()->bukti) }}"
-                                            class="btn btn-info "><i class="bi bi-file-earmark-text"></i> Lihat Bukti
-                                        </a>
-                                    </div>
                                 </td>
                             @else
                                 <td>-</td>
                             @endif
-
                         </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>
     </main>
 
+    {{-- script chart js --}}
+    <script>
+        const labels = {!! json_encode($labels) !!};
+        const data = {!! json_encode($values) !!};
 
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Hasil per Bulan',
+                    data: data,
+                    borderWidth: 1,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 
     {{-- menampilkan footer --}}
     @include('admin.partials.footer-admin')

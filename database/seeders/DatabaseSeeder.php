@@ -17,12 +17,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
         // User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
 
         User::create([
             'nama' => 'admin',
@@ -33,14 +31,14 @@ class DatabaseSeeder extends Seeder
         'email' => 'admin@gmail.com',
         ]);
 
-        user::create([
-            'nama' => 'kelompok4',
-            'username' => 'kelompok4',
-            'password' => Hash::make('12345678'),
-            'alamat' => 'kelompok4',
-            'role' => 'user',
-        'email' => 'kelompok4@gmail.com',
-        ]);
+        // user::create([
+        //     'nama' => 'kelompok9',
+        //     'username' => 'kelompok9',
+        //     'password' => Hash::make('12345678'),
+        //     'alamat' => 'kelompok9',
+        //     'role' => 'user',
+        // 'email' => 'kelompok4@gmail.com',
+        // ]);
 
         user::create([
             'nama' => 'pengelola',
@@ -52,24 +50,24 @@ class DatabaseSeeder extends Seeder
         ]);
 
         user::create([
-            'nama' => 'hawa',
-            'username' => 'hawa123',
+            'nama' => 'Fakhri',
+            'username' => 'Fakhri',
             'password' => Hash::make('12345678'),
-            'alamat' => 'rumah hawa',
+            'alamat' => 'rumahku',
             'role' => 'user',
-        'email' => 'hawa@gmail.com',
+        'email' => 'fakhria@gmail.com',
         // 'user_id' => '1'
         ]);
 
-        user::create([
-            'nama' => 'iza',
-            'username' => 'iza123',
-            'password' => Hash::make('12345678'),
-            'alamat' => 'rumah iza',
-            'role' => 'user',
-        'email' => 'iza@gmail.com',
-        // 'user_id' => '2'
-        ]);
+        // user::create([
+        //     'nama' => 'iza',
+        //     'username' => 'iza123',
+        //     'password' => Hash::make('12345678'),
+        //     'alamat' => 'rumah iza',
+        //     'role' => 'user',
+        // 'email' => 'iza@gmail.com',
+        // // 'user_id' => '2'
+        // ]);
 
         // pembayaran::create([
         //     'user_id' => '1',
@@ -119,6 +117,10 @@ class DatabaseSeeder extends Seeder
         // Laporan::create([
         //     'id' => '12',
         //     'bulan' => 'desember',
+        // ]);
+
+        // _sampah_tkmpl::create([
+
         // ]);
 
     }

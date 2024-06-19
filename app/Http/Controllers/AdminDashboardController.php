@@ -24,7 +24,7 @@ class AdminDashboardController extends Controller
         // }
 
         //untuk mengecualikan user dengan role admin dan pengelola
-        $warga = User::whereNotIn('role', ['admin', 'pengelola'])->latest();
+        $warga = User::whereNotIn('role', ['admin'])->latest();
         if(request('search')){
             $warga->where(function($query) {
                 $query->where('nama', 'like', '%'. request('search'). '%')
@@ -39,7 +39,6 @@ class AdminDashboardController extends Controller
         ], compact('warga'));
     }
 
-
     // public function tagihan()
     // {
     //     return view('admin.tagihan',[
@@ -47,7 +46,6 @@ class AdminDashboardController extends Controller
     //     ]
     //     );
     // }
-
 
     public function edit($id)
     {
@@ -59,7 +57,6 @@ class AdminDashboardController extends Controller
 
     }
 
-
     public function update(Request $request, $id)
     {
         $warga = User::findorfail($id);
@@ -68,7 +65,6 @@ class AdminDashboardController extends Controller
         Session::flash('success', 'Data baru berhasil diedit.');
         return redirect('/admin');
     }
-
 
 
     public function show()

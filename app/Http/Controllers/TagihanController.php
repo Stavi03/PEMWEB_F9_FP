@@ -7,8 +7,9 @@ use App\Http\Requests\StoreTagihanRequest;
 use App\Http\Requests\UpdateTagihanRequest;
 use Illuminate\Support\Facades\Session;
 
+
 //import model
-use App\Models\Tagihan;
+use App\Models\sampah_tkmpls;
 use App\Models\User;
 
 
@@ -19,43 +20,56 @@ class TagihanController extends Controller
      */
     public function index()
     {
-
-        // $tagihan = Tagihan::all();
-        // $datapembayaran = Tagihan::with('user')->get();
-        // return view('admin.tagihan',[
-        //     "title" => "tagihan"
-        // ], compact('tagihan', 'datapembayaran'));
-
-        $users = User::with('tagihan')->whereNotIn('role', ['admin', 'pengelola'])->get();
+        // Ambil semua data pengguna dengan relasi sampah_tkmpls
+        $users = User::with('sampah_tkmpls')->get();
 
         // Menambahkan pencarian nama user sebelum pengurutan
         if ($search = request('search')) {
-            $users = $users->filter(function($user) use ($search) {
-                return str_contains($user->nama, $search);
+            $users = $users->filter(function ($user) use ($search) {
+                return str_contains(strtolower($user->nama), strtolower($search));
             });
         }
 
-        // menambahkan filter bulan
+        // Menambahkan filter bulan dengan optimasi menggunakan whereHas
         if ($bulan = request('bulan')) {
-            // Ambil data berdasarkan bulan yang dipilih dari kolom bulan pada database tagihan
-            $users = $users->filter(function($user) use ($bulan) {
-                return $user->tagihan->where('bulan', $bulan)->count() > 0;
+            $users = $users->filter(function ($user) use ($bulan) {
+                return $user->sampah_tkmpls->where('bulan', $bulan)->count() > 0;
             });
         }
 
-        // Mengurutkan pengguna berdasarkan status pembayaran
-        $sortedUsers = $users->sortBy(function ($user) {
-            $firstTagihan = $user->tagihan->first();
-            return $firstTagihan ? ($firstTagihan->status == 'sudah terbayar' ? 0 : 1) : 1;
-        });
+        // Ambil data sampah_tkmpls berdasarkan filter bulan
+        $sampah_tkmpls = sampah_tkmpls::when($bulan, function ($query, $bulan) {
+                return $query->where('bulan', $bulan);
+            })
+            ->get();
 
+        // Kumpulkan data berdasarkan bulan dan hitung total hasil
+        $data = $sampah_tkmpls->groupBy('bulan')
+            ->map(function ($items) {
+                return [
+                    'bulan' => $items->first()->bulan,
+                    'Hasil' => $items->sum('Hasil')
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        // Buat array untuk label (bulan) dan nilai (hasil)
+        $labels = array_column($data, 'bulan');
+        $values = array_column($data, 'Hasil');
+
+        // Kirim data ke view
         return view('admin.tagihan', [
-            "title" => "tagihan",
-            'users' => $sortedUsers
+            "title" => "pengelola",
+            'laporanPerBulan' => $data,
+            'users' => $users,
+            'labels' => json_encode($labels),
+            'values' => json_encode($values)
         ]);
-
-
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.

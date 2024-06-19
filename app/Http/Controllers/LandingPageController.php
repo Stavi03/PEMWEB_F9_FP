@@ -14,9 +14,21 @@ class LandingPageController extends Controller
         );
     }
 
-    public function penggunaan() {
-        return view('landing-page.penggunaan',[
-            "title" => "penggunaan"
+    public function sampahor() {
+        return view('landing-page.sampahor',[
+            "title" => "LimbahKu"
+        ]
+        );
+    }
+    public function sampahpl() {
+        return view('landing-page.sampahpl',[
+            "title" => "LimbahKu"
+        ]
+        );
+    }
+    public function sampahkc() {
+        return view('landing-page.sampahkc',[
+            "title" => "LimbahKu"
         ]
         );
     }

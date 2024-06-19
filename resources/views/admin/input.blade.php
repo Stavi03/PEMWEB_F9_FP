@@ -1,8 +1,8 @@
-@extends('user.layout.main-user')
+@extends('admin.layout.main-admin')
 
-@section('pembayaran')
+@section('input')
     {{-- menampilkan navbar --}}
-    @include('user.partials.navbar-user')
+    @include('admin.partials.navbar-admin')
     {{-- css --}}
     <link rel="stylesheet" href="{{ asset('css/style-user.css') }}">
 
@@ -15,18 +15,33 @@
             <div class="py-5 text-center">
                 {{-- <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72"
                     height="57"> --}}
-                <h2>Pembayaran</h2>
+                <h2>Input Data</h2>
             </div>
 
             <div class="row g-5 justify-content-center">
 
                 <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3">Data Pembayaran</h4>
+                    <h4 class="mb-3">Input Data</h4>
 
 
-                    <form method="POST" action="{{ route('pembayaran.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.input.store') }}">
                         @csrf
                         <div class="row g-3">
+
+                            <div class="col-sm-12">
+                                <label for="user" class="form-label">User</label>
+                                <div class="input-group">
+                                    <select class="form-select" id="user" name="user" required>
+                                        <option value="">Pilih User</option>
+                                        @foreach ($users as $id => $nama)
+                                            <option value="{{ $id }}" {{ old('user') == $id ? 'selected' : '' }}>{{ $nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
+
                             <!-- Pilihan bulan -->
                             <div class="col-sm-12">
                                 <label for="bulan" class="form-label">Pilihan Bulan</label>
@@ -50,6 +65,18 @@
                                 </div>
                             </div>
 
+                            <!-- berat -->
+                            <div class="col-sm-12">
+                                <label for="berat" class="form-label">Berat</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="Berat" name="Berat" required
+                                    placeholder="Masukan berat sampah" value="{{ old('Berat') }}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Gram.</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Nominal Pembayaran -->
                             <div class="col-sm-12">
                                 <label for="nominal" class="form-label">Nominal Pembayaran</label>
@@ -57,40 +84,11 @@
                                     <div class="input-group-prepend">
                                       <span class="input-group-text">Rp.</span>
                                     </div>
-                                    <input type="text" class="form-control" id="nominal" name="nominal" required
-                                    onkeyup="formatRupiah(this)"  placeholder="Masukan nominal pembayaran" value="{{ old('nominal') }}">
+                                    <input type="text" class="form-control" id="Hasil" name="Hasil" required
+                                    onkeyup="formatRupiah(this)"  placeholder="Masukan nominal Hasil" value="{{ old('Hasil') }}">
                                 </div>
                                 <div class="invalid-feedback">
-                                    Masukan nominal pembayaran.
-                                </div>
-                            </div>
-
-
-                            <!-- Upload Bukti Pembayaran -->
-                            <div class="col-12">
-                                <label for="bukti" class="form-label">Upload Bukti Pembayaran<span
-                                        class="text-muted">(Wajib
-                                        sertakan bukti pembayaran)</span></label>
-                                <input type="file" class="form-control" id="bukti" name="bukti" accept="image/*"
-                                    required>
-                                @error('bukti')
-                                    <script>
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Oops...',
-                                            text: 'File harus berupa Gambar!',
-                                        })
-                                    </script>
-                                @enderror
-                            </div>
-
-                            <!-- Catatan Pembayaran -->
-                            <div class="col-sm-12">
-                                <label for="catatan" class="form-label">Catatan Pembayaran</label>
-                                <input type="text" class="form-control" id="catatan" name="catatan"
-                                    placeholder="Masukan catatan pembayaran" value="{{ old('catatan') }}">
-                                <div class="invalid-feedback">
-                                    Masukan catatan pembayaran.
+                                    Masukan nominal Hasil.
                                 </div>
                             </div>
 
@@ -98,13 +96,12 @@
                             <hr class="my-4">
 
                             <!-- Tombol Bayar -->
-                            <button class="w-100 btn btn-lg" type="submit">Bayar</button>
+                            <button class="w-100 btn btn-lg" type="submit">Input Data</button>
                             {{-- sweet alert --}}
                             @if (Session::has('success'))
                                 <script>
                                     Swal.fire({
                                         title: "Berhasil!",
-                                        text: "Admin akan mengubah status pembayaran anda secepatnya.",
                                         icon: "success"
                                     });
                                 </script>
@@ -115,19 +112,8 @@
         </div>
     </main>
 
-    <script>
-        // Fungsi untuk memformat input menjadi format Rupiah
-        function formatRupiah(input) {
-            let value = input.value.replace(/[^0-9]/g, '');
-            let formattedValue = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-            input.value = formattedValue;
-        }
-        document.getElementById('nominal').addEventListener('input', function() {
-            formatRupiah(this);
-        });
-    </script>
 
 
     {{-- menampilkan footer --}}
-    @include('user.partials.footer-user')
+    @include('admin.partials.footer-admin')
 @endsection

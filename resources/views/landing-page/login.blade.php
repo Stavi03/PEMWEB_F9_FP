@@ -21,7 +21,7 @@
 
                     <div class="form-floating">
                         {{-- <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> --}}
-                        <h1 class="h3 mb-3 fw-normal">Masuk</h1>
+                        <h1 class="h3 mb-3 fw-normal"><b>Masuk</b></h1>
                         <div class="form-floating mb-3w">
                             <input type="username" name="username"
                                 class="form-control @error('username')
@@ -73,13 +73,14 @@
                                 <input type="checkbox" value="remember-me"> Remember me
                             </label>
                         </div>
-                        <button class="w-100 btn btn-lg" type="submit">Masuk</button>
+                        <button class="w-100 btn btn-lg" type="submit"><b>Masuk</b></button>
+                        <small class="d-block text-center mt-3">
+                            Belum punya akun? Silahkan Hubungi CS :<b style="color: white;"> 0092819828</b>
+                        </small>
                     </div>
                 </div>
             </div>
         </form>
-
-        <small class="d-block text-center mt-3">Belum punya akun? <a href="/daftar">Daftar</a></small>
 
     </section>
 

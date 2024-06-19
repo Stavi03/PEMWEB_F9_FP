@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trash P</title>
+    <title>LimbahKu</title>
     <!-- css -->
     <link rel="stylesheet" href="css/style-admin.css">
     <!-- bootstrap -->
@@ -26,6 +26,7 @@
     @yield('tagihan')
     @yield('warga')
     @yield('data-baru')
+    @yield('input')
     @yield('ubah-data')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

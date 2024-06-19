@@ -7,14 +7,16 @@ use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\PengelolaDashboardController;
 use App\Http\Controllers\TagihanController;
-use App\Http\Controllers\WargaController;
+use App\Http\Controllers\SampahController;
 
 
 // start landing page
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [LandingPageController::class, 'homepage']);
-    Route::get('/penggunaan', [LandingPageController::class, 'penggunaan']);
 });
+Route::get('/sampahor', [LandingPageController::class, 'sampahor'])->name('sampahor');
+Route::get('/sampahpl', [LandingPageController::class, 'sampahpl'])->name('sampahpl');
+Route::get('/sampahkc', [LandingPageController::class, 'sampahkc'])->name('sampahkc');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -26,9 +28,10 @@ Route::post('/logout', [LoginController::class, 'logout']);
 // start user
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/user', [UserDashboardController::class, 'index'])->name('user')->middleware('auth');
-    Route::get('/pembayaran', [UserDashboardController::class, 'pembayaran'])->name('pembayaran');
-    Route::post('/pembayaran', [UserDashboardController::class, 'store'])->name('pembayaran.store');
+    Route::get('/user', [UserDashboardController::class, 'index'])->name('user');
+    // Route::get('/user/tes', [UserDashboardController::class, 'datauser'])->name('user');
+    // Route::get('/pembayaran', [UserDashboardController::class, 'pembayaran'])->name('pembayaran');
+
 });
 // end user
 
@@ -40,8 +43,11 @@ Route::middleware(['auth', 'adminakses'])->group(function () {
 
     // Route::resource('/admin/tagihan', PembayaranController::class);
     // Route::get('/admin/tagihan', [AdminDashboardController::class, 'tagihan'])->name('admin.tagihan');
-    Route::get('/admin/tagihan', [TagihanController::class, 'index'])->name('admin.tagihan');
+    Route::get('/admin/limbah', [TagihanController::class, 'index'])->name('admin.tagihan');
     Route::get('/admin/data-warga', [AdminDashboardController::class, 'datawarga']);
+
+    Route::get('/admin/input', [SampahController::class, 'index'])->name('admin.input');
+    Route::post('/admin/input', [SampahController::class, 'store'])->name('admin.input.store');
 
     Route::get('/admin/ubah-data/{id}', [AdminDashboardController::class, 'edit'])->name('admin.edit-data');
     Route::post('/admin/ubah-data/{id}', [AdminDashboardController::class, 'update'])->name('admin.edit-data.update');

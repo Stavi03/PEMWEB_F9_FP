@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Tagihan;
 use App\Models\User;
+use App\Models\sampah_tkmpls;
 
 
 class Laporan extends Model
@@ -19,9 +20,9 @@ protected $fillable = [
 
 protected $guarded = ['id'];
 
-public function Tagihan()
+public function sampah_tkmpls()
 {
-    return $this->belongsTo(Tagihan::class);
+    return $this->belongsTo(sampah_tkmpls::class);
 }
 }
 
