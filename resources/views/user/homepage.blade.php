@@ -18,18 +18,8 @@
                         echo '<h2>Selamat Pagi: ' . Auth::user()->nama . ' </h2>';
                     }
                 @endphp
-                <p class="pb-2 mt-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, repudiandae autem
-                    velit
-                    et
-                    odio numquam? Eveniet similique sequi expedita iusto, quasi mollitia dolor exercitationem quia culpa
-                    doloribus debitis nesciunt, qui molestias. Non debitis libero dignissimos quod minus nihil doloribus?
-                    Quasi
-                    doloribus dicta quia quos placeat quisquam beatae nemo molestiae ut nostrum, id nam saepe! Unde mollitia
-                    qui, ratione incidunt illo beatae officiis ad. Dolore, velit? Quas quibusdam a, hic accusantium
-                    voluptatum,
-                    id, omnis neque quod voluptatem maxime dolorum deserunt ipsum dolore sapiente necessitatibus doloribus
-                    reprehenderit beatae quia non nemo quaerat ea nesciunt obcaecati! Sapiente, accusantium eos reiciendis
-                    laborum similique reprehenderit.</p>
+                <p class="pb-2 mt-4">selamat datang di website LimbahKu Driyo redjo dimana kamu dapat melihat data sampah
+                    yang terkumpul dengan transparant!!</p>
             </div>
         </section>
 
@@ -41,6 +31,7 @@
             <table class="table table-striped table-sm " style="back">
                 <thead>
                     <tr>
+                        <th scope="col">User_ID</th>
                         <th scope="col">Sampah Terkumpul (gram)</th>
                         <th scope="col">Hasil penjualan</th>
                         <th scope="col">Status</th>
@@ -49,19 +40,12 @@
                 <tbody>
                     @foreach ($sampah as $data)
                         <tr>
-                            <td>{{ $data->Berat }}</td>
-                            <td>{{ $data->Hasil }}</td>
+                            <td>{{ $data->user_id }}</td>
+                            <td>{{ $data->Berat }} Gram</td>
+                            <td>Rp.{{ $data->Hasil }}</td>
                             <td>{{ $data->created_at }}</td>
                         </tr>
                     @endforeach
-                    {{-- @foreach ($users as $data)
-                        <tr>
-                            <td>{{ $data->sampah_tkmpls->Berat }}</td>
-                            <td>{{ $data->sampah_tkmpls->hasil ?? 'Tidak ada nominal' }}</td>
-                            <td>{{ $data->sampah_tkmpls->created_at }}</td>
-                        </tr>
-                    @endforeach --}}
-
                 </tbody>
             </table>
         </section>

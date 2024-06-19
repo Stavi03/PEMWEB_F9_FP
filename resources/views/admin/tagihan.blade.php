@@ -1,6 +1,10 @@
-@extends('admin.layout.main-admin')
+<?php
+$labels = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+?>
 
+@extends('admin.layout.main-admin')
 @section('tagihan')
+
     {{-- menampilkan navbar --}}
     @include('admin.partials.navbar-admin')
 
@@ -60,6 +64,7 @@
                         <th scope="col">Nama Warga</th>
                         <th scope="col">Bulan</th>
                         <th scope="col">Catatan Keuangan</th>
+                        <th scope="col">Limbah Terkumpul</th>
                         <th scope="col">Tanggal Pengumpulan</th>
                     </tr>
                 </thead>
@@ -70,6 +75,7 @@
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->sampah_tkmpls->first()->bulan ?? now()->format('F') }}</td>
                             <td>Rp.{{ $data->sampah_tkmpls->first()->Hasil ?? '-' }}</td>
+                            <td>{{ $data->sampah_tkmpls->first()->Berat ?? '-' }}Gram</td>
                             <td>
                                 {{ $data->sampah_tkmpls->first() ? $data->sampah_tkmpls->first()->created_at->format('d-m-Y') : '-' }}
                             </td>
@@ -93,7 +99,7 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Hasil per Bulan',
+                    label: 'Hasil per Tahun',
                     data: data,
                     borderWidth: 1,
                     borderColor: 'rgba(75, 192, 192, 1)',
