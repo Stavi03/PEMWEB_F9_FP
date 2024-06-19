@@ -114,5 +114,12 @@ return redirect()->back()->with ('success', 'Data berhasil dihapus.');
     // return redirect('/admin')->with('success', 'Data berhasil dihapus.');
 }
 
+// public function cetak_pdf()
+//     {
+//     	$warga = user::all();
+
+//     	$pdf = PDF::loadview('user_pdf',['user'=>$warga]);
+//     	return $pdf->download('laporan-user-pdf');
+//     }
 
 }

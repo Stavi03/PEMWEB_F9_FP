@@ -35,21 +35,17 @@
                         <select class="form-select" id="bulanFilter" name="bulan">
                             <option value="">Pilih Bulan...</option>
                             <option value="Januari" {{ request('bulan') == 'Januari' ? 'selected' : '' }}>Januari</option>
-                            <option value="Februari" {{ request('bulan') == 'Februari' ? 'selected' : '' }}>Februari
-                            </option>
+                            <option value="Februari" {{ request('bulan') == 'Februari' ? 'selected' : '' }}>Februari</option>
                             <option value="Maret" {{ request('bulan') == 'Maret' ? 'selected' : '' }}>Maret</option>
                             <option value="April" {{ request('bulan') == 'April' ? 'selected' : '' }}>April</option>
                             <option value="Mei" {{ request('bulan') == 'Mei' ? 'selected' : '' }}>Mei</option>
                             <option value="Juni" {{ request('bulan') == 'Juni' ? 'selected' : '' }}>Juni</option>
                             <option value="Juli" {{ request('bulan') == 'Juli' ? 'selected' : '' }}>Juli</option>
                             <option value="Agustus" {{ request('bulan') == 'Agustus' ? 'selected' : '' }}>Agustus</option>
-                            <option value="September" {{ request('bulan') == 'September' ? 'selected' : '' }}>September
-                            </option>
+                            <option value="September" {{ request('bulan') == 'September' ? 'selected' : '' }}>September</option>
                             <option value="Oktober" {{ request('bulan') == 'Oktober' ? 'selected' : '' }}>Oktober</option>
-                            <option value="November" {{ request('bulan') == 'November' ? 'selected' : '' }}>November
-                            </option>
-                            <option value="Desember" {{ request('bulan') == 'Desember' ? 'selected' : '' }}>Desember
-                            </option>
+                            <option value="November" {{ request('bulan') == 'November' ? 'selected' : '' }}>November</option>
+                            <option value="Desember" {{ request('bulan') == 'Desember' ? 'selected' : '' }}>Desember</option>
                         </select>
                         <button class="btn btn-primary" type="submit">Filter</button>
                     </div>
@@ -63,7 +59,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama Warga</th>
                         <th scope="col">Bulan</th>
-                        <th scope="col">Catatan</th>
+                        <th scope="col">Catatan Keuangan</th>
                         <th scope="col">Tanggal Pengumpulan</th>
                     </tr>
                 </thead>
@@ -73,7 +69,7 @@
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->sampah_tkmpls->first()->bulan ?? now()->format('F') }}</td>
-                            <td>{{ $data->sampah_tkmpls->first()->catatan ?? '-' }}</td>
+                            <td>Rp.{{ $data->sampah_tkmpls->first()->Hasil ?? '-' }}</td>
                             <td>
                                 {{ $data->sampah_tkmpls->first() ? $data->sampah_tkmpls->first()->created_at->format('d-m-Y') : '-' }}
                             </td>
@@ -93,7 +89,7 @@
 
         const ctx = document.getElementById('myChart').getContext('2d');
         const myChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: labels,
                 datasets: [{

@@ -24,14 +24,14 @@
                     <h4 class="mb-3">Input Data</h4>
 
 
-                    <form method="POST" action="{{ route('admin.input.store') }}">
+                    <form method="POST" action="{{ route('admin.input.store') }}" method="POST">
                         @csrf
                         <div class="row g-3">
 
                             <div class="col-sm-12">
-                                <label for="user" class="form-label">User</label>
+                                <label for="user_id" class="form-label">User</label>
                                 <div class="input-group">
-                                    <select class="form-select" id="user" name="user" required>
+                                    <select class="form-select" id="user_id" name="user_id" required>
                                         <option value="">Pilih User</option>
                                         @foreach ($users as $id => $nama)
                                             <option value="{{ $id }}" {{ old('user') == $id ? 'selected' : '' }}>{{ $nama }}</option>
@@ -39,7 +39,6 @@
                                     </select>
                                 </div>
                             </div>
-
 
 
                             <!-- Pilihan bulan -->

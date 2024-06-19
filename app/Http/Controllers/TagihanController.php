@@ -60,7 +60,7 @@ class TagihanController extends Controller
 
         // Kirim data ke view
         return view('admin.tagihan', [
-            "title" => "pengelola",
+            "title" => "admin",
             'laporanPerBulan' => $data,
             'users' => $users,
             'labels' => json_encode($labels),
