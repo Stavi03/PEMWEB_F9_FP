@@ -13,7 +13,9 @@ class sampah_tkmpls extends Model
     use HasFactory;
 
     protected $table = 'sampah_tkmpls';
-    protected $fillable = ['user_id', 'Berat', 'Hasil', 'bulan'];
+    protected $fillable = [
+        'user_id', 'bulan', 'Berat', 'Hasil'
+    ];
     protected $guarded = [];
 
     public function User(){

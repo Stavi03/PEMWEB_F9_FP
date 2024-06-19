@@ -95,7 +95,12 @@
 
                             <hr class="my-4">
 
-                            <!-- Tombol Bayar -->
+                            <!-- Tombol Input -->
+                            {{-- <form action="{{ route('admin.store') }}" method="POST">
+                                @csrf
+                                <!-- Form fields here -->
+                                <button type="submit">Submit</button>
+                            </form> --}}
                             <button class="w-100 btn btn-lg" type="submit">Input Data</button>
                             {{-- sweet alert --}}
                             @if (Session::has('success'))

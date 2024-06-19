@@ -15,7 +15,7 @@ class SampahController extends Controller
 {
     public function index()
 {
-    $users = User::pluck('nama', 'id'); // Mengambil daftar nama pengguna beserta ID mereka
+    $users = User::pluck('nama', 'id');
 
     return view('admin.input', compact('users'))->with([
         "title" => "input"
@@ -25,12 +25,11 @@ class SampahController extends Controller
 public function store(Request $request)
 {
     // dd($request->all());
-    // Validasi data yang dikirim dari form
     $validatedData = $request->validate([
         'user_id' => 'required|exists:users,id',
         'bulan' => 'required',
-        'Berat' => 'required',
-        'Hasil' => 'required',
+        'Berat' => 'required|numeric',
+        'Hasil' => 'required|numeric',
     ]);
 
     // Simpan data ke dalam database menggunakan model sampah_tkmpls
@@ -40,8 +39,9 @@ public function store(Request $request)
     $sampah_tkmpls->Berat = $request->input('Berat');
     $sampah_tkmpls->Hasil = $request->input('Hasil');
     $sampah_tkmpls->save();
+
     // Redirect kembali dengan pesan sukses jika berhasil disimpan
-    return redirect()->route('/admin')->with('success', 'Data sampah_tkmpls berhasil disimpan.');
+    return redirect()->route('admin.index')->with('success', 'Data sampah_tkmpls berhasil disimpan.');
 }
 
 }

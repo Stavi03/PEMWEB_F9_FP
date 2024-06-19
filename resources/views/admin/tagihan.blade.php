@@ -63,7 +63,6 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama Warga</th>
                         <th scope="col">Bulan</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Catatan</th>
                         <th scope="col">Tanggal Pengumpulan</th>
                     </tr>
@@ -74,21 +73,10 @@
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->sampah_tkmpls->first()->bulan ?? now()->format('F') }}</td>
-                            <td
-                                style="{{ $data->sampah_tkmpls->first() ? 'color:' . ($data->sampah_tkmpls->first()->status === 'sudah terbayar' ? 'green' : 'red') : 'color:red' }}">
-                                {{ $data->sampah_tkmpls->first() ? $data->sampah_tkmpls->first()->status : 'belum terbayar' }}
-                            </td>
                             <td>{{ $data->sampah_tkmpls->first()->catatan ?? '-' }}</td>
                             <td>
                                 {{ $data->sampah_tkmpls->first() ? $data->sampah_tkmpls->first()->created_at->format('d-m-Y') : '-' }}
                             </td>
-                            @if ($data->sampah_tkmpls->first() && $data->sampah_tkmpls->first()->status == 'sudah terbayar')
-                                <td>
-                                    {{-- button untuk melihat bukti --}}
-                                </td>
-                            @else
-                                <td>-</td>
-                            @endif
                         </tr>
                     @endforeach
                 </tbody>
@@ -97,9 +85,11 @@
     </main>
 
     {{-- script chart js --}}
+    <canvas id="myChart" width="400" height="200"></canvas>
     <script>
-        const labels = {!! json_encode($labels) !!};
-        const data = {!! json_encode($values) !!};
+
+        const labels = <?php echo json_encode($labels); ?>;
+        const data = <?php echo json_encode($values); ?>;
 
         const ctx = document.getElementById('myChart').getContext('2d');
         const myChart = new Chart(ctx, {
